@@ -13,8 +13,8 @@ function Testimonials() {
 
         <div className="space-y-4 animate-fade-in">
           <blockquote className="text-gray-700 italic">
-            "HobbyFlo has the potential to capture a multi-billion dollar
-            market."
+            &ldquo;HobbyFlo has the potential to capture a multi-billion dollar
+            market.&ldquo;
             <span className="block font-medium text-gray-900">
               - Silvio Micali
             </span>

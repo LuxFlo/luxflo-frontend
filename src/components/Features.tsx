@@ -28,7 +28,7 @@ function Features() {
           </div>
           <div className="p-4 animate-fade-in-up">
             <h3 className="text-lg font-medium text-gray-700">
-              All ASA's are supported
+              All ASA&apos;s are supported
             </h3>
             <p className="text-gray-500">That includes USDCa</p>
           </div>
