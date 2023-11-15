@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta property="og:title" content="Kalygo" />
+        <meta property="og:title" content="LuxFlo" />
         <meta
           property="og:description"
           content="LuxFlo is a luxury rentals platform powered by Algorand."
