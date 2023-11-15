@@ -1,4 +1,4 @@
-import { BlockchainHealthWidget } from "@/components/BlockchainHealthWidget";
+import BlockchainHealthWidgetGroup from "@/components/BlockchainHealthWidgetGroup";
 import { useAppContext } from "@/context/AppContext";
 import DashboardLayout from "@/layouts/dashboardLayout";
 import { AlgorandClient } from "@/services/algorand_client";
@@ -91,7 +91,7 @@ export default function Dashboard() {
     jsx = "...";
   } else if (statusAlgorand.v) {
     jsx = (
-      <BlockchainHealthWidget
+      <BlockchainHealthWidgetGroup
         healthResponse={statusAlgorand.v}
         network={state.network}
         accountAddress={accountAddress}
