@@ -42,16 +42,17 @@ export default function Page() {
       imageUrl: "/team/Patrick_Devaney.png",
     },
     {
-      name: "Julio Cruz",
+      name: "Julio M Cruz",
       title: "Architect",
       description: "Julio is our cloud architect.",
-      imageUrl: "/team/Julio_Cruz.png",
+      imageUrl: "https://avatars.githubusercontent.com/u/62020?v=4",
     },
     {
       name: "Tad Duval",
       title: "COO",
       description: "Tad is responsible for partnerships and marketing.",
-      imageUrl: "/team/Tad_Duval.png",
+      imageUrl:
+        "https://media.licdn.com/dms/image/D4E03AQFeaPTgFLJQSA/profile-displayphoto-shrink_800_800/0/1693350818487?e=2147483647&v=beta&t=CcSWxYbN0ndAgW27J_52nYTkfzc3f2kpOaplFVi_zE0",
     },
   ];
 
