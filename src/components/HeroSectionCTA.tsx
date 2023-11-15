@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HeroSectionTCA() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 shadow-lg flex bg-white px-4">
+    <section className="w-full py-12 md:py-24 lg:py-32 shadow-lg flex bg-white px-32">
       <div
         className="w-1/2 bg-cover bg-center"
         style={{
