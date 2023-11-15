@@ -5,7 +5,7 @@ export default function FeaturesGroup() {
       <p className="text-lg text-gray-600">
         Discover what makes our platform stand out from the crowd
       </p>
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 items-center">
         <div className="flex flex-col items-center space-y-4">
           <svg
             className=" h-8 w-8 text-yellow-600"

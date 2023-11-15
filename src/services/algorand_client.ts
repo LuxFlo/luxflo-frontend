@@ -13,26 +13,32 @@ const supportedNetworks: any = {
       port: 4002,
     },
   },
-  TestNet: {
+  testnet: {
     algod: {
-      token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
-      server: "https://testnet-algorand.api.purestake.io/ps2",
+      // token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
+      token: "",
+      // server: "https://testnet-algorand.api.purestake.io/ps2",
+      server: "https://mainnet-idx.algonode.cloud",
       port: 443,
     },
     indexer: {
-      token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
-      server: "https://testnet-algorand.api.purestake.io/idx2",
+      // token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
+      token: "",
+      // server: "https://testnet-algorand.api.purestake.io/idx2",
+      server: "https://testnet-idx.algonode.cloud",
       port: 443,
     },
   },
-  MainNet: {
+  mainnet: {
     algod: {
-      token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
+      // token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
+      token: "",
       server: "https://mainnet-algorand.api.purestake.io/ps2",
       port: 443,
     },
     indexer: {
-      token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
+      // token: "L8aqpbBiwS55OTYOFpFsK9BCBhjaFSRb2p9D1Vdf",
+      token: "",
       server: "https://mainnet-algorand.api.purestake.io/idx2",
       port: 443,
     },
@@ -46,11 +52,12 @@ export class AlgorandClient {
   static connectAlgod(network: string) {
     try {
       const algodClient = new algosdk.Algodv2(
-        network === "localhost"
-          ? supportedNetworks[network]?.algod.token
-          : {
-              "X-API-key": supportedNetworks[network]?.algod.token,
-            },
+        // network === "localhost"
+        //   ? supportedNetworks[network]?.algod.token
+        //   : {
+        //       "X-API-key": supportedNetworks[network]?.algod.token,
+        //     },
+        supportedNetworks[network]?.algod.token,
         supportedNetworks[network]?.algod.server,
         supportedNetworks[network]?.algod.port
       );
@@ -68,11 +75,12 @@ export class AlgorandClient {
   static async connectIndexer(network: string) {
     try {
       const indexerClient = new algosdk.Indexer(
-        network === "localhost"
-          ? supportedNetworks[network]?.indexer.token
-          : {
-              "X-API-key": supportedNetworks[network]?.indexer.token,
-            },
+        // network === "localhost"
+        //   ? supportedNetworks[network]?.indexer.token
+        //   : {
+        //       "X-API-key": supportedNetworks[network]?.indexer.token,
+        //     },
+        supportedNetworks[network]?.indexer.token,
         supportedNetworks[network]?.indexer.server,
         supportedNetworks[network]?.indexer.port
       );

@@ -1,4 +1,4 @@
-import { TransactionsTable } from "@/components/TransactionTable";
+import { TransactionsTable } from "@/components/TransactionsTable";
 import DashboardLayout from "@/layouts/dashboardLayout";
 import { useEffect, useState } from "react";
 
@@ -23,18 +23,8 @@ async function fetchTxns(
       .do();
 
     console.log("accountTxnsResponse", accountTxnsResponse);
-    // accountTxnsStateSetter({
-    //   val: accountTxnsResponse,
-    //   loading: false,
-    //   error: null,
-    // });
   } catch (e) {
     console.error(e);
-    // accountTxnsStateSetter({
-    //   val: null,
-    //   loading: false,
-    //   error: e,
-    // });
     // showErrorToast("Error occurred while fetching transaction history");
   }
 }
@@ -43,6 +33,12 @@ export default function Transactions() {
   const { state, dispatch } = useAppContext();
   const [accountAddress, setAccountAddress] = useState<string>("");
   const isConnectedToPeraWallet = !!accountAddress;
+
+  const [txns, setTxns] = useState({
+    l: true,
+    v: null,
+    e: null,
+  });
 
   function handleConnectWalletClick() {
     console.log("handleConnectWalletClick");
@@ -70,10 +66,15 @@ export default function Transactions() {
   }
 
   useEffect(() => {
-    console.log("useEffect", accountAddress, state.network);
-    if (accountAddress && state.network) {
-      fetchTxns("", state.network, accountAddress);
+    async function fetch() {
+      console.log("useEffect", accountAddress, state.network);
+
+      if (accountAddress && state.network) {
+        await fetchTxns("", state.network, accountAddress);
+      }
     }
+
+    fetch();
   }, [accountAddress, state.network]);
 
   useEffect(() => {
@@ -95,13 +96,22 @@ export default function Transactions() {
 
   console.log("accountAddress", accountAddress);
 
+  let jsx = null;
+  if (txns.l) {
+    jsx = "...";
+  } else if (txns.v) {
+    jsx = <TransactionsTable txns={txns.v} accountAddress={accountAddress} />;
+  } else {
+    jsx = "?";
+  }
+
   return (
     <DashboardLayout
       isConnectedToPeraWallet={isConnectedToPeraWallet}
       handleDisconnectWalletClick={handleDisconnectWalletClick}
       handleConnectWalletClick={handleConnectWalletClick}
     >
-      <TransactionsTable txns={[]} />
+      <TransactionsTable txns={[]} accountAddress={accountAddress} />
     </DashboardLayout>
   );
 }

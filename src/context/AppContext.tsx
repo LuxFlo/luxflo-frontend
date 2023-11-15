@@ -52,6 +52,11 @@ export function AppWrapper({ children }: Props) {
   }, [state, dispatch]);
 
   useEffect(() => {
+    console.log("AppContext useEffect #1");
+    console.log(
+      "AppContext useEffect #1",
+      JSON.parse(localStorage.getItem("state")!)
+    );
     if (localStorage.getItem("state")) {
       dispatch({
         type: "init_stored",
@@ -60,6 +65,7 @@ export function AppWrapper({ children }: Props) {
     }
   }, []);
   useEffect(() => {
+    console.log("AppContext useEffect #2");
     if (state !== initialState) {
       localStorage.setItem("state", JSON.stringify(state));
     }

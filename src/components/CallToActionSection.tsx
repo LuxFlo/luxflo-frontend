@@ -13,7 +13,7 @@ export default function CallToActionSection() {
           Ready to get started?
         </h2>
         <p className="mt-2 text-xl text-gray-50 md:text-2xl">
-          Try HobbyFlo today!.
+          Try LuxFlo today!
         </p>
         <div className="mt-4">
           <button

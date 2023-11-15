@@ -1,7 +1,7 @@
 "use client";
 
 import moment from "moment-timezone";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Datetime from "react-datetime";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
@@ -37,7 +37,12 @@ export default function SettingsForm() {
     }
   };
 
-  console.log("state", state);
+  useEffect(() => {
+    setValue("network", state.network);
+  }, [state.network]);
+
+  watch("network");
+  console.log("state.network ->", state.network);
 
   return (
     <>
@@ -86,9 +91,9 @@ export default function SettingsForm() {
                       autoComplete="network"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
-                      <option>mainnet</option>
-                      <option>testnet</option>
-                      <option>localhost</option>
+                      <option value="mainnet">mainnet</option>
+                      <option value="testnet">testnet</option>
+                      <option value="localhost">localhost</option>
                     </select>
                   </div>
                 </div>

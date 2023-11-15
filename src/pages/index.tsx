@@ -1,6 +1,7 @@
 import CallToActionSection from "@/components/CallToActionSection";
 import FeaturesGroup from "@/components/FeaturesGroup";
 import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
 import HeroSectionTCA from "@/components/HeroSectionCTA";
 import Navbar from "@/components/Navbar";
 import TestimonialsGroup from "@/components/TestimonialsGroup";
@@ -10,7 +11,8 @@ export default function Home(props: any) {
     <>
       <div>
         <Navbar />
-        <HeroSectionTCA />
+        {/* <HeroSectionTCA /> */}
+        <HeroSection />
         <CallToActionSection />
         <FeaturesGroup />
         <TestimonialsGroup />

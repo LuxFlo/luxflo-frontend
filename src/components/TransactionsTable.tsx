@@ -2,11 +2,12 @@ import get from "lodash.get";
 import { useRouter } from "next/router";
 
 interface P {
+  accountAddress: string;
   txns: any[];
 }
 
 export function TransactionsTable(p: P) {
-  let { txns } = p;
+  let { txns, accountAddress } = p;
   const router = useRouter();
 
   txns = txns.slice(0, 10);
@@ -16,10 +17,12 @@ export function TransactionsTable(p: P) {
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">
-            Your txns
+            Transactions
           </h1>
           <p className="mt-2 text-sm text-gray-700">
-            Transactions for {"0xasdf"}
+            {accountAddress?.substring(0, 4) +
+              "..." +
+              accountAddress?.substring(accountAddress?.length - 4)}
           </p>
         </div>
       </div>
@@ -31,26 +34,26 @@ export function TransactionsTable(p: P) {
                 scope="col"
                 className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
               >
-                Requested at
+                Txn ID
               </th>
               <th
                 scope="col"
                 className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
               >
-                Model
+                Mined at
               </th>
               <th
                 scope="col"
                 className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
               >
-                Mode
+                Txn Type
               </th>
-              <th
+              {/* <th
                 scope="col"
                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
                 Preview
-              </th>
+              </th> */}
               <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                 <span className="sr-only">View</span>
               </th>
@@ -85,14 +88,11 @@ export function TransactionsTable(p: P) {
                   <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
                     {txn.scanMode}
                   </td>
-                  <td className="px-3 py-4 text-sm text-gray-500"></td>
                   <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <button
                       className="text-blue-600 hover:text-blue-900"
                       onClick={() => {
-                        router.push(
-                          `/dashboard/summary-v3?summary-v3-id=${txn.id}`
-                        );
+                        router.push(`/`);
                       }}
                     >
                       View
