@@ -18,7 +18,7 @@ export default function Transactions() {
     v: any;
     e: any;
   }>({
-    l: true,
+    l: false,
     v: null,
     e: null,
   });
@@ -68,11 +68,7 @@ export default function Transactions() {
 
           console.log("accountTxnsResponse", accountTxnsResponse);
 
-          setTxns({
-            v: accountTxnsResponse,
-            l: false,
-            e: null,
-          });
+          return accountTxnsResponse;
         } catch (e) {
           console.error(e);
           // showErrorToast("Error occurred while fetching transaction history");
@@ -86,7 +82,35 @@ export default function Transactions() {
       }
 
       if (accountAddress && state.network) {
-        await fetchTxns("", state.network, accountAddress);
+        try {
+          setTxns({
+            l: true,
+            v: null,
+            e: null,
+          });
+          const accountTxnsResponse = await fetchTxns(
+            "",
+            state.network,
+            accountAddress
+          );
+          setTxns({
+            l: false,
+            v: accountTxnsResponse,
+            e: null,
+          });
+        } catch (e) {
+          setTxns({
+            l: false,
+            v: null,
+            e: e,
+          });
+        }
+      } else {
+        setTxns({
+          l: false,
+          v: null,
+          e: new Error("No connected account"),
+        });
       }
     }
 
@@ -118,7 +142,7 @@ export default function Transactions() {
   } else if (txns.v) {
     jsx = <TransactionsTable txns={txns.v} accountAddress={accountAddress} />;
   } else {
-    jsx = "?";
+    jsx = txns?.e?.message?.toString();
   }
 
   return (
