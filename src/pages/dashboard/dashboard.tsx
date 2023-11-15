@@ -1,23 +1,13 @@
 import { BlockchainHealthWidget } from "@/components/BlockchainHealthWidget";
-import { useAppContext } from "@/context/AppContext";
 import DashboardLayout from "@/layouts/dashboardLayout";
-import { AlgorandClient } from "@/services/algorand_client";
-import { errorToast } from "@/utils/toasts";
-import { PeraWalletConnect } from "@perawallet/connect";
 import { useEffect, useState } from "react";
-
-const peraWallet = new PeraWalletConnect();
+import { peraWallet, showErrorToast } from ".";
 
 export default function Dashboard() {
-  const { state, dispatch } = useAppContext();
-  const [statusAlgorand, setStatusAlgorand] = useState<{
-    l: boolean;
-    v: any;
-    e: any;
-  }>({
-    v: "...",
-    l: true,
-    e: undefined,
+  const [statusAlgorand, setStatusAlgorand] = useState<any>({
+    val: "...",
+    loading: true,
+    error: undefined,
   });
 
   const [accountAddress, setAccountAddress] = useState<string>("");
@@ -44,6 +34,7 @@ export default function Dashboard() {
   function handleDisconnectWalletClick() {
     console.log("handleDisconnectWalletClick");
     peraWallet.disconnect();
+
     setAccountAddress("");
   }
 
@@ -64,36 +55,44 @@ export default function Dashboard() {
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const response = await AlgorandClient.getAlgod(state.network)
+        // setStatus({
+        //   val: status.val,
+        //   loading: true,
+        //   error: null,
+        // });
+        const response = await AlgorandClient.getAlgod(
+          settings.selectedAlgorandNetwork
+        )
           .status()
           .do();
 
         setStatusAlgorand({
-          v: response,
-          l: false,
-          e: null,
+          val: response,
+          loading: false,
+          error: null,
         });
       } catch (e) {
         console.error("e", e);
-        errorToast("Error occurred while fetching network status");
-        setStatusAlgorand({
-          v: null,
-          l: false,
-          e: e,
-        });
+
+        showErrorToast("Error occurred while fetching network status");
+
+        if (settings.selectedBlockchain === "Ethereum") {
+          setStatusEthereum({
+            val: null,
+            loading: false,
+            error: e,
+          });
+        } else if (settings.selectedBlockchain === "Algorand") {
+          setStatusAlgorand({
+            val: null,
+            loading: false,
+            error: e,
+          });
+        }
       }
     }, 4000);
     return () => clearInterval(interval);
-  }, [state.network]);
-
-  let jsx = null;
-  if (statusAlgorand.l) {
-    jsx = "...";
-  } else if (statusAlgorand.v) {
-    jsx = <BlockchainHealthWidget healthResponse={statusAlgorand.v} />;
-  } else {
-    jsx = "?";
-  }
+  });
 
   return (
     <>
@@ -111,7 +110,8 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        {jsx}
+
+        <BlockchainHealthWidget />
       </DashboardLayout>
     </>
   );
