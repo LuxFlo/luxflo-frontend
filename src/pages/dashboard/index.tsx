@@ -54,21 +54,15 @@ export default function Dashboard() {
         handleDisconnectWalletClick={handleDisconnectWalletClick}
         handleConnectWalletClick={handleConnectWalletClick}
       >
-        {/* Hello */}
-        {/* <button
-          onClick={() => {
-            if (isConnectedToPeraWallet) {
-              console.log("-!-!- -!-!- -!-!-");
-              handleDisconnectWalletClick();
-            } else {
-              console.log("--- --- ---");
-              handleConnectWalletClick();
-            }
-          }}
-        >
-          {isConnectedToPeraWallet ? "Disconnect" : "Connect to Pera Wallet"}
-        </button> */}
-        Dashboard
+        <div className="p-4 sm:p-6 lg:p-8">
+          <div className="sm:flex sm:items-center">
+            <div className="sm:flex-auto">
+              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                Blockchain Health
+              </h2>
+            </div>
+          </div>
+        </div>
       </DashboardLayout>
     </>
   );
