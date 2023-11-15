@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { ReactNode, useState } from 'react'
-import { Escrow, EscrowClient } from '../contracts/DaoClient'
-import { useWallet } from '@txnlab/use-wallet'
+import { ReactNode, useState } from "react";
+import { Escrow, EscrowClient } from "@/contracts/EscrowClient";
+import { useWallet } from "@txnlab/use-wallet";
 
 /* Example usage
 <EscrowCreateApplication
@@ -18,30 +18,31 @@ import { useWallet } from '@txnlab/use-wallet'
   contractLength={contractLength}
 />
 */
-type EscrowCreateApplicationArgs = Dao['methods']['createApplication(asset,address,address,address,uint64,string,uint64)void']['argsObj']
+type EscrowCreateApplicationArgs =
+  Escrow["methods"]["createApplication(asset,address,address,address,uint64,string,uint64)void"]["argsObj"];
 
 type Props = {
-  buttonClass: string
-  buttonLoadingNode?: ReactNode
-  buttonNode: ReactNode
-  typedClient: EscrowClient
-  asa: EscrowCreateApplicationArgs['asa']
-  renter: EscrowCreateApplicationArgs['renter']
-  owner: EscrowCreateApplicationArgs['owner']
-  arbiter: EscrowCreateApplicationArgs['arbiter']
-  amount: EscrowCreateApplicationArgs['amount']
-  terms: EscrowCreateApplicationArgs['terms']
-  contractLength: EscrowCreateApplicationArgs['contractLength']
-}
+  buttonClass: string;
+  buttonLoadingNode?: ReactNode;
+  buttonNode: ReactNode;
+  typedClient: EscrowClient;
+  asa: EscrowCreateApplicationArgs["asa"];
+  renter: EscrowCreateApplicationArgs["renter"];
+  owner: EscrowCreateApplicationArgs["owner"];
+  arbiter: EscrowCreateApplicationArgs["arbiter"];
+  amount: EscrowCreateApplicationArgs["amount"];
+  terms: EscrowCreateApplicationArgs["terms"];
+  contractLength: EscrowCreateApplicationArgs["contractLength"];
+};
 
 const EscrowCreateApplication = (props: Props) => {
-  const [loading, setLoading] = useState<boolean>(false)
-  const { activeAddress, signer } = useWallet()
-  const sender = { signer, addr: activeAddress! }
+  const [loading, setLoading] = useState<boolean>(false);
+  const { activeAddress, signer } = useWallet();
+  const sender = { signer, addr: activeAddress! };
 
   const callMethod = async () => {
-    setLoading(true)
-    console.log(`Calling createApplication`)
+    setLoading(true);
+    console.log(`Calling createApplication`);
     await props.typedClient.create.createApplication(
       {
         asa: props.asa,
@@ -52,16 +53,16 @@ const EscrowCreateApplication = (props: Props) => {
         terms: props.terms,
         contractLength: props.contractLength,
       },
-      { sender },
-    )
-    setLoading(false)
-  }
+      { sender }
+    );
+    setLoading(false);
+  };
 
   return (
     <button className={props.buttonClass} onClick={callMethod}>
       {loading ? props.buttonLoadingNode || props.buttonNode : props.buttonNode}
     </button>
-  )
-}
+  );
+};
 
-export default EscrowCreateApplication
+export default EscrowCreateApplication;
