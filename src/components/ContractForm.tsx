@@ -5,8 +5,27 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import Datetime from "react-datetime";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
+import { infoToast } from "@/utils/toasts";
+import { EscrowClient } from "../contracts/EscrowClient";
+import {
+  SendTransactionResult,
+  TransactionToSign,
+  SendTransactionFrom,
+} from "@algorandfoundation/algokit-utils/types/transaction";
+import { useWallet } from "@txnlab/use-wallet";
+import { errorReporter } from "@/utils/error/reporter";
 
-export default function ContractForm() {
+interface P {
+  typedClient: EscrowClient;
+  // activeAddress: string;
+}
+
+export default function ContractForm(p: P) {
+  const { activeAddress, signer } = useWallet();
+  const sender = { signer, addr: activeAddress! };
+
+  console.log("!!! activeAddress !!!", activeAddress);
+
   const {
     register,
     handleSubmit,
@@ -17,8 +36,8 @@ export default function ContractForm() {
     control,
   } = useForm({
     defaultValues: {
-      buyer: "",
-      seller: "",
+      renter: "",
+      owner: "",
       arbiter: "",
       endDate: moment().add("0", "m"),
       termsHash: "",
@@ -29,18 +48,34 @@ export default function ContractForm() {
 
   const onSubmit = async (data: any) => {
     try {
-      const { buyer, seller, arbiter, endDate } = data;
+      const { renter, owner, arbiter, endDate } = data;
 
       const endDateUnixMilliseconds = endDate.unix() * 1000;
 
       console.log("data", data);
       console.log("endDate", endDate);
 
-      // Ethers.js deploy contract here
+      infoToast("Deploying Contract...");
 
-      //   infoToast("Deploying Contract...");
+      console.log(`Calling createApplication`);
+      await p.typedClient.create.createApplication(
+        {
+          asa: 1,
+          renter: "ZBACV42L6NLCTRCEADAWWKHB3FWXDDQLUFG4RVC5ATBUBQZWG4ZHZPFTFM",
+          owner: "ZBACV42L6NLCTRCEADAWWKHB3FWXDDQLUFG4RVC5ATBUBQZWG4ZHZPFTFM",
+          arbiter: "ZBACV42L6NLCTRCEADAWWKHB3FWXDDQLUFG4RVC5ATBUBQZWG4ZHZPFTFM",
+          amount: 100,
+          terms: "asdf",
+          contractLength: 100,
+        },
+        { sender }
+      );
+
+      const { appId } = await p.typedClient.appClient.getAppReference();
+
+      console.log("appId", appId);
     } catch (e) {
-      //   errorReporter(e);
+      errorReporter(e);
     }
   };
 
@@ -52,23 +87,23 @@ export default function ContractForm() {
             <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="buyer"
+                  htmlFor="renter"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Buyer
+                  Renter
                 </label>
                 <div className="mt-2">
                   <input
-                    {...register("buyer", {
-                      required: true,
+                    {...register("renter", {
+                      // required: true,
                     })}
-                    id="buyer"
-                    name="buyer"
+                    id="renter"
+                    name="renter"
                     type="text"
-                    autoComplete="buyer"
-                    placeholder={"Buyer Address"}
+                    autoComplete="renter"
+                    placeholder={"Renter Address"}
                     className={`block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 ${
-                      errors["buyer"] && "ring-red-700 focus:ring-red-500"
+                      errors["renter"] && "ring-red-700 focus:ring-red-500"
                     }`}
                   />
                 </div>
@@ -82,16 +117,16 @@ export default function ContractForm() {
                 </label>
                 <div className="mt-2">
                   <input
-                    {...register("seller", {
-                      required: true,
+                    {...register("owner", {
+                      // required: true,
                     })}
-                    id="seller"
-                    name="seller"
-                    type="seller"
-                    autoComplete="seller"
-                    placeholder={"Seller Address"}
+                    id="owner"
+                    name="owner"
+                    type="owner"
+                    autoComplete="owner"
+                    placeholder={"Owner Address"}
                     className={`block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 ${
-                      errors["seller"] && "ring-red-700 focus:ring-red-500"
+                      errors["owner"] && "ring-red-700 focus:ring-red-500"
                     }`}
                   />
                 </div>
@@ -106,7 +141,7 @@ export default function ContractForm() {
                 <div className="mt-2">
                   <input
                     {...register("arbiter", {
-                      required: true,
+                      // required: true,
                     })}
                     id="arbiter"
                     name="arbiter"
@@ -131,7 +166,7 @@ export default function ContractForm() {
               <div className="mt-2">
                 <input
                   {...register("termsHash", {
-                    required: true,
+                    // required: true,
                   })}
                   type="text"
                   name="termsHash"

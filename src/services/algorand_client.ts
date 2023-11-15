@@ -1,6 +1,6 @@
 import algosdk from "algosdk";
 
-const supportedNetworks: any = {
+export const supportedNetworks: any = {
   localhost: {
     algod: {
       token: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",

@@ -51,6 +51,7 @@ export default function Settings() {
 
   return (
     <DashboardLayout
+      showConnectButton={true}
       isConnectedToPeraWallet={isConnectedToPeraWallet}
       handleDisconnectWalletClick={handleDisconnectWalletClick}
       handleConnectWalletClick={handleConnectWalletClick}

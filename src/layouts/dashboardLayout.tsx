@@ -26,6 +26,8 @@ import { usePathname, useRouter } from "next/navigation";
 import Spinner from "@/components/Spinner";
 
 import Link from "next/link";
+import { classNames } from "@/utils/classNames";
+import TxnLabConnect from "@/components/TxnLabConnect";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
@@ -48,20 +50,18 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function DashboardLayout({
   children,
   isConnectedToPeraWallet,
   handleDisconnectWalletClick,
   handleConnectWalletClick,
+  showConnectButton,
 }: {
   children: React.ReactNode;
   isConnectedToPeraWallet: boolean;
   handleDisconnectWalletClick: () => void;
   handleConnectWalletClick: () => void;
+  showConnectButton: boolean;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
@@ -313,22 +313,25 @@ export default function DashboardLayout({
                   aria-hidden="true"
                 /> */}
 
-                <button
-                  onClick={() => {
-                    if (isConnectedToPeraWallet) {
-                      console.log("-!-!- -!-!- -!-!-");
-                      handleDisconnectWalletClick();
-                    } else {
-                      console.log("--- --- ---");
-                      handleConnectWalletClick();
-                    }
-                  }}
-                  className="bg-[#00dc94] text-black px-5 py-2 font-semibold rounded hover:bg-gray-100"
-                >
-                  {isConnectedToPeraWallet
-                    ? "Disconnect"
-                    : "Connect to Pera Wallet"}
-                </button>
+                <TxnLabConnect />
+                {/* {showConnectButton && (
+                  <button
+                    onClick={() => {
+                      if (isConnectedToPeraWallet) {
+                        console.log("-!-!- -!-!- -!-!-");
+                        handleDisconnectWalletClick();
+                      } else {
+                        console.log("--- --- ---");
+                        handleConnectWalletClick();
+                      }
+                    }}
+                    className="bg-[#00dc94] text-black px-5 py-2 font-semibold rounded hover:bg-gray-100"
+                  >
+                    {isConnectedToPeraWallet
+                      ? "Disconnect"
+                      : "Connect to Pera Wallet"}
+                  </button>
+                )} */}
 
                 {/* Profile dropdown */}
                 {/* <Menu as="div" className="relative"> */}

@@ -1,69 +1,100 @@
-import ContractForm from "@/components/ContractForm";
+import * as algokit from "@algorandfoundation/algokit-utils";
+import { useAppContext } from "@/context/AppContext";
+import { EscrowClient } from "@/contracts/EscrowClient";
 import DashboardLayout from "@/layouts/dashboardLayout";
+import { supportedNetworks } from "@/services/algorand_client";
 import { PeraWalletConnect } from "@perawallet/connect";
 import { useEffect, useState } from "react";
+import {
+  PROVIDER_ID,
+  ProvidersArray,
+  WalletProvider,
+  useInitializeProviders,
+  useWallet,
+} from "@txnlab/use-wallet";
+import algosdk from "algosdk";
+import ContractForm from "@/components/ContractForm";
+import ConnectWallet from "@/components/ConnectWallet";
+import TxnLabConnect from "@/components/TxnLabConnect";
 
 const peraWallet = new PeraWalletConnect();
+let providersArray: ProvidersArray;
+providersArray = [
+  { id: PROVIDER_ID.PERA, clientStatic: PeraWalletConnect },
+  // refer to https://github.com/TxnLab/use-wallet for detailed WalletConnect v2 provider integration instructions
+];
 
 export default function Contract() {
+  const { state } = useAppContext();
+  const [openWalletModal, setOpenWalletModal] = useState<boolean>(false);
+  const [appID, setAppID] = useState<number>(0);
   const [accountAddress, setAccountAddress] = useState<string>("");
   const isConnectedToPeraWallet = !!accountAddress;
 
-  function handleConnectWalletClick() {
-    console.log("handleConnectWalletClick");
-    peraWallet
-      .connect()
-      .then((newAccounts) => {
-        peraWallet?.connector?.on("disconnect", handleDisconnectWalletClick);
+  const algodClient = algokit.getAlgoClient({
+    server: supportedNetworks[state.network].algod.server,
+    token: supportedNetworks[state.network].algod.token,
+    port: supportedNetworks[state.network].algod.port,
+  });
 
-        console.log("newAccounts", newAccounts);
+  const { activeAddress } = useWallet();
 
-        setAccountAddress(newAccounts[0] || "");
-      })
-      .catch((error) => {
-        if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
-          console.log(error);
-        }
-      });
-  }
+  const typedClient = new EscrowClient(
+    {
+      resolveBy: "id",
+      id: appID,
+    },
+    algodClient
+  );
 
-  function handleDisconnectWalletClick() {
-    console.log("handleDisconnectWalletClick");
-    peraWallet.disconnect();
+  const toggleWalletModal = () => {
+    setOpenWalletModal(!openWalletModal);
+  };
 
-    setAccountAddress("");
-  }
+  const walletProviders = useInitializeProviders({
+    providers: providersArray,
+    nodeConfig: {
+      network: state.network,
+      nodeServer: supportedNetworks[state.network].algod.server,
+      nodePort: String(supportedNetworks[state.network].algod.port),
+      nodeToken: String(supportedNetworks[state.network].algod.token),
+    },
+    algosdkStatic: algosdk,
+  });
 
-  useEffect(() => {
-    // Reconnect to the session when the component is mounted
-    peraWallet
-      .reconnectSession()
-      .then((accounts) => {
-        peraWallet?.connector?.on("disconnect", handleDisconnectWalletClick);
-
-        if (accounts.length) {
-          setAccountAddress(accounts[0]);
-        }
-      })
-      .catch((e) => console.log(e));
-  }, []);
+  console.log("openWalletModal", openWalletModal);
 
   return (
-    <DashboardLayout
-      isConnectedToPeraWallet={isConnectedToPeraWallet}
-      handleDisconnectWalletClick={handleDisconnectWalletClick}
-      handleConnectWalletClick={handleConnectWalletClick}
-    >
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="sm:flex sm:items-center">
-          <div className="sm:flex-auto">
-            <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-              Contract
-            </h2>
+    <WalletProvider value={walletProviders}>
+      <DashboardLayout
+        showConnectButton={false}
+        isConnectedToPeraWallet={isConnectedToPeraWallet}
+        handleDisconnectWalletClick={() => {}}
+        handleConnectWalletClick={() => {}}
+      >
+        <div className="p-4 sm:p-6 lg:p-8">
+          <div className="sm:flex sm:items-center">
+            <div className="sm:flex-auto">
+              <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                Contract
+              </h2>
+            </div>
           </div>
         </div>
-      </div>
-      <ContractForm />
-    </DashboardLayout>
+        {/* <button
+          onClick={() => {
+            setOpenWalletModal(!openWalletModal);
+          }}
+        >
+          Connect Wallet
+        </button>
+        <ConnectWallet
+          openModal={openWalletModal}
+          closeModal={toggleWalletModal}
+        /> */}
+        {/* <TxnLabConnect /> */}
+        <ContractForm typedClient={typedClient} />
+      </DashboardLayout>
+    </WalletProvider>
   );
 }

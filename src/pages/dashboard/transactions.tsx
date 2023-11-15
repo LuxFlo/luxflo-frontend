@@ -9,7 +9,7 @@ import { AlgorandClient } from "@/services/algorand_client";
 const peraWallet = new PeraWalletConnect();
 
 export default function Transactions() {
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const [accountAddress, setAccountAddress] = useState<string>("");
   const isConnectedToPeraWallet = !!accountAddress;
 
@@ -147,6 +147,7 @@ export default function Transactions() {
 
   return (
     <DashboardLayout
+      showConnectButton={true}
       isConnectedToPeraWallet={isConnectedToPeraWallet}
       handleDisconnectWalletClick={handleDisconnectWalletClick}
       handleConnectWalletClick={handleConnectWalletClick}
