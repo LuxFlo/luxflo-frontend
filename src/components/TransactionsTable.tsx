@@ -3,14 +3,18 @@ import { useRouter } from "next/router";
 
 interface P {
   accountAddress: string;
-  txns: any[];
+  txns: any;
 }
 
 export function TransactionsTable(p: P) {
   let { txns, accountAddress } = p;
   const router = useRouter();
 
-  txns = txns.slice(0, 10);
+  console.log("txns", txns);
+
+  const transactions = txns?.transactions?.slice(0, 10);
+
+  console.log("transactions", transactions);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -31,19 +35,19 @@ export function TransactionsTable(p: P) {
                 scope="col"
                 className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
               >
-                Txn ID
+                Round Time
               </th>
               <th
                 scope="col"
                 className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
               >
-                Mined at
+                ID
               </th>
               <th
                 scope="col"
                 className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
               >
-                Txn Type
+                Type
               </th>
               {/* <th
                 scope="col"
@@ -57,33 +61,36 @@ export function TransactionsTable(p: P) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
-            {txns.map((txn) => {
+            {transactions.map((txn: any) => {
               return (
                 <tr key={txn.id}>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0">
                     <p>
-                      <time dateTime={new Date(txn.createdAt).toLocaleString()}>
-                        {new Date(txn.createdAt).toLocaleString()}
+                      <time
+                        dateTime={new Date(
+                          txn["round-time"] * 1000
+                        ).toLocaleString()}
+                      >
+                        {new Date(txn["round-time"] * 1000).toLocaleString()}
                       </time>
                     </p>
                     <dl className="font-normal lg:hidden">
-                      <dt className="sr-only">Model</dt>
-                      <dd className="mt-1 truncate text-gray-700">
-                        {txn.model.slice(0, 16)}
-                      </dd>
-                      <dt className="sr-only sm:hidden">Mode</dt>
+                      <dt className="sr-only">ID</dt>
+                      <dd className="mt-1 truncate text-gray-700">{`${txn.id.slice(
+                        0,
+                        8
+                      )}...`}</dd>
+                      <dt className="sr-only sm:hidden">Type</dt>
                       <dd className="mt-1 truncate text-gray-500 sm:hidden">
-                        {txn.scanMode}
+                        {txn["tx-type"]}
                       </dd>
                     </dl>
                   </td>
                   <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                    {txn.model.length > 24
-                      ? `${txn.model.slice(0, 24)}...`
-                      : txn.model}
+                    {`${txn.id.slice(0, 8)}...`}
                   </td>
                   <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                    {txn.scanMode}
+                    {txn["tx-type"]}
                   </td>
                   <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <button

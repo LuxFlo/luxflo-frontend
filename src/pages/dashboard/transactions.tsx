@@ -8,33 +8,16 @@ import { AlgorandClient } from "@/services/algorand_client";
 
 const peraWallet = new PeraWalletConnect();
 
-async function fetchTxns(
-  nextToken: string,
-  network: string,
-  accountAddress: string
-) {
-  try {
-    console.log("__fetchTxns__", nextToken, network, accountAddress);
-
-    const accountTxnsResponse = await AlgorandClient.getIndexer(network)
-      .lookupAccountTransactions(accountAddress)
-      .limit(21)
-      .nextToken(nextToken)
-      .do();
-
-    console.log("accountTxnsResponse", accountTxnsResponse);
-  } catch (e) {
-    console.error(e);
-    // showErrorToast("Error occurred while fetching transaction history");
-  }
-}
-
 export default function Transactions() {
   const { state, dispatch } = useAppContext();
   const [accountAddress, setAccountAddress] = useState<string>("");
   const isConnectedToPeraWallet = !!accountAddress;
 
-  const [txns, setTxns] = useState({
+  const [txns, setTxns] = useState<{
+    l: boolean;
+    v: any;
+    e: any;
+  }>({
     l: true,
     v: null,
     e: null,
@@ -67,7 +50,40 @@ export default function Transactions() {
 
   useEffect(() => {
     async function fetch() {
-      console.log("useEffect", accountAddress, state.network);
+      // console.log("useEffect", accountAddress, state.network);
+
+      async function fetchTxns(
+        nextToken: string,
+        network: string,
+        accountAddress: string
+      ) {
+        try {
+          console.log("__fetchTxns__", nextToken, network, accountAddress);
+
+          const accountTxnsResponse = await AlgorandClient.getIndexer(network)
+            .lookupAccountTransactions(accountAddress)
+            .limit(21)
+            .nextToken(nextToken)
+            .do();
+
+          console.log("accountTxnsResponse", accountTxnsResponse);
+
+          setTxns({
+            v: accountTxnsResponse,
+            l: false,
+            e: null,
+          });
+        } catch (e) {
+          console.error(e);
+          // showErrorToast("Error occurred while fetching transaction history");
+
+          setTxns({
+            v: null,
+            l: false,
+            e: e,
+          });
+        }
+      }
 
       if (accountAddress && state.network) {
         await fetchTxns("", state.network, accountAddress);
@@ -120,7 +136,7 @@ export default function Transactions() {
           </div>
         </div>
       </div>
-      <TransactionsTable txns={[]} accountAddress={accountAddress} />
+      {jsx}
     </DashboardLayout>
   );
 }
