@@ -6,7 +6,7 @@ export const initialState = {
   adminRedirect: "",
   admin: false,
   // network: "mainnet",
-  network: "localhost",
+  network: "testnet",
 };
 
 export type Action =

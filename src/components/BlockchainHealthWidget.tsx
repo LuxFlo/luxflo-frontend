@@ -31,7 +31,9 @@ export function BlockchainHealthWidget(p: P) {
             </div>
 
             <div className="mx-auto flex max-w-xs flex-col gap-y-4">
-              <dt className="text-2xl leading-7 text-gray-600">Account</dt>
+              <dt className="text-2xl leading-7 text-gray-600">
+                Connected Account
+              </dt>
               <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
                 {accountAddress
                   ? `${accountAddress?.substring(
