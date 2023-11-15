@@ -52,16 +52,8 @@ const userNavigation = [
 
 export default function DashboardLayout({
   children,
-  isConnectedToPeraWallet,
-  handleDisconnectWalletClick,
-  handleConnectWalletClick,
-  showConnectButton,
 }: {
   children: React.ReactNode;
-  isConnectedToPeraWallet: boolean;
-  handleDisconnectWalletClick: () => void;
-  handleConnectWalletClick: () => void;
-  showConnectButton: boolean;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();

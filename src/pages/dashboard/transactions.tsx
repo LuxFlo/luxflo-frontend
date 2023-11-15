@@ -5,14 +5,13 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { PeraWalletConnect } from "@perawallet/connect";
 import { AlgorandClient } from "@/services/algorand_client";
+import { useWallet } from "@txnlab/use-wallet";
 
 const peraWallet = new PeraWalletConnect();
 
 export default function Transactions() {
   const { state } = useAppContext();
-  const [accountAddress, setAccountAddress] = useState<string>("");
-  const isConnectedToPeraWallet = !!accountAddress;
-
+  const { activeAddress } = useWallet();
   const [txns, setTxns] = useState<{
     l: boolean;
     v: any;
@@ -23,35 +22,8 @@ export default function Transactions() {
     e: null,
   });
 
-  function handleConnectWalletClick() {
-    console.log("handleConnectWalletClick");
-    peraWallet
-      .connect()
-      .then((newAccounts) => {
-        peraWallet?.connector?.on("disconnect", handleDisconnectWalletClick);
-
-        console.log("newAccounts", newAccounts);
-
-        setAccountAddress(newAccounts[0] || "");
-      })
-      .catch((error) => {
-        if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
-          console.log(error);
-        }
-      });
-  }
-
-  function handleDisconnectWalletClick() {
-    console.log("handleDisconnectWalletClick");
-    peraWallet.disconnect();
-
-    setAccountAddress("");
-  }
-
   useEffect(() => {
     async function fetch() {
-      // console.log("useEffect", accountAddress, state.network);
-
       async function fetchTxns(
         nextToken: string,
         network: string,
@@ -81,7 +53,7 @@ export default function Transactions() {
         }
       }
 
-      if (accountAddress && state.network) {
+      if (activeAddress && state.network) {
         try {
           setTxns({
             l: true,
@@ -91,7 +63,7 @@ export default function Transactions() {
           const accountTxnsResponse = await fetchTxns(
             "",
             state.network,
-            accountAddress
+            activeAddress
           );
           setTxns({
             l: false,
@@ -115,43 +87,21 @@ export default function Transactions() {
     }
 
     fetch();
-  }, [accountAddress, state.network]);
+  }, [activeAddress, state.network]);
 
-  useEffect(() => {
-    console.log("Reconnect to the session when the component is mounted");
-    // Reconnect to the session when the component is mounted
-    peraWallet
-      .reconnectSession()
-      .then((accounts) => {
-        peraWallet?.connector?.on("disconnect", handleDisconnectWalletClick);
-
-        console.log("reconnectSession");
-
-        if (accounts.length) {
-          setAccountAddress(accounts[0]);
-        }
-      })
-      .catch((e) => console.log(e));
-  }, []);
-
-  console.log("accountAddress", accountAddress);
+  console.log("activeAddress", activeAddress);
 
   let jsx = null;
   if (txns.l) {
     jsx = "...";
   } else if (txns.v) {
-    jsx = <TransactionsTable txns={txns.v} accountAddress={accountAddress} />;
+    jsx = <TransactionsTable txns={txns.v} activeAddress={activeAddress} />;
   } else {
     jsx = txns?.e?.message?.toString();
   }
 
   return (
-    <DashboardLayout
-      showConnectButton={true}
-      isConnectedToPeraWallet={isConnectedToPeraWallet}
-      handleDisconnectWalletClick={handleDisconnectWalletClick}
-      handleConnectWalletClick={handleConnectWalletClick}
-    >
+    <DashboardLayout>
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">

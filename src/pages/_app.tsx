@@ -1,10 +1,38 @@
-import { AppWrapper } from "@/context/AppContext";
+import { AppWrapper, useAppContext } from "@/context/AppContext";
 import "@/styles/globals.css";
 import "react-datetime/css/react-datetime.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import {
+  PROVIDER_ID,
+  ProvidersArray,
+  WalletProvider,
+  useInitializeProviders,
+} from "@txnlab/use-wallet";
+import { PeraWalletConnect } from "@perawallet/connect";
+import { supportedNetworks } from "@/services/algorand_client";
+import algosdk from "algosdk";
+
+let providersArray: ProvidersArray;
+providersArray = [
+  { id: PROVIDER_ID.PERA, clientStatic: PeraWalletConnect },
+  // refer to https://github.com/TxnLab/use-wallet for detailed WalletConnect v2 provider integration instructions
+];
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { state } = useAppContext();
+
+  const walletProviders = useInitializeProviders({
+    providers: providersArray,
+    nodeConfig: {
+      network: state.network,
+      nodeServer: supportedNetworks[state.network].algod.server,
+      nodePort: String(supportedNetworks[state.network].algod.port),
+      nodeToken: String(supportedNetworks[state.network].algod.token),
+    },
+    algosdkStatic: algosdk,
+  });
+
   return (
     <>
       <Head>
@@ -28,10 +56,11 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="keywords" content="luxury goods, luxury rentals, luxury" />
       </Head>
-
-      <AppWrapper>
-        <Component {...pageProps} />
-      </AppWrapper>
+      <WalletProvider value={walletProviders}>
+        <AppWrapper>
+          <Component {...pageProps} />
+        </AppWrapper>
+      </WalletProvider>
     </>
   );
 }

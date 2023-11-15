@@ -2,12 +2,12 @@ import get from "lodash.get";
 import { useRouter } from "next/router";
 
 interface P {
-  accountAddress: string;
+  activeAddress: string | undefined;
   txns: any;
 }
 
 export function TransactionsTable(p: P) {
-  let { txns, accountAddress } = p;
+  let { txns, activeAddress } = p;
   const router = useRouter();
 
   console.log("txns", txns);
@@ -21,9 +21,7 @@ export function TransactionsTable(p: P) {
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <p className="mt-2 text-sm text-gray-700">
-            {accountAddress?.substring(0, 4) +
-              "..." +
-              accountAddress?.substring(accountAddress?.length - 4)}
+            {activeAddress && activeAddress?.substring(0, 8) + "..."}
           </p>
         </div>
       </div>
