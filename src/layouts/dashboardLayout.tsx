@@ -163,7 +163,7 @@ export default function DashboardLayout({
                                   className={classNames(
                                     item.current
                                       ? "bg-gray-50 text-gray-600"
-                                      : "text-gray-700 hover:text-gray-600 hover:bg-gray-50",
+                                      : "text-black hover:text-gray-600 hover:bg-gray-50",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
@@ -227,8 +227,8 @@ export default function DashboardLayout({
                             item.href.split("/")[
                               item.href.split("/").length - 1
                             ] === current
-                              ? "bg-gray-50 text-gray-600"
-                              : "text-gray-700 hover:text-gray-600 hover:bg-gray-50",
+                              ? "bg-gray-50 text-black"
+                              : "text-black hover:text-gray-600 hover:bg-gray-50",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
@@ -236,7 +236,7 @@ export default function DashboardLayout({
                             className={classNames(
                               item.current
                                 ? "text-gray-600"
-                                : "text-gray-400 group-hover:text-gray-600",
+                                : "text-black group-hover:text-gray-600",
                               "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
@@ -250,10 +250,10 @@ export default function DashboardLayout({
                 <li className="mt-auto">
                   <Link
                     href="/dashboard/settings"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-gray-600"
+                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-black hover:bg-gray-50 hover:text-gray-600"
                   >
                     <Cog6ToothIcon
-                      className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-gray-600"
+                      className="h-6 w-6 shrink-0 text-black group-hover:text-gray-600"
                       aria-hidden="true"
                     />
                     Settings
