@@ -183,7 +183,7 @@ export default function DashboardLayout({
                           </ul>
                         </li>
                         <li className="mt-auto">
-                          <a
+                          <Link
                             href="/dashboard/settings"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-gray-600"
                           >
@@ -192,7 +192,7 @@ export default function DashboardLayout({
                               aria-hidden="true"
                             />
                             Settings
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </nav>
