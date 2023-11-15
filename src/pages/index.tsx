@@ -1,5 +1,5 @@
 import CallToAction from "@/components/CallToAction";
-import Features from "@/components/Features";
+import FeaturesGroup from "@/components/FeaturesGroup";
 import Footer from "@/components/Footer";
 import HeroSectionTCA from "@/components/HeroSectionCTA";
 import Navbar from "@/components/Navbar";
@@ -12,7 +12,7 @@ export default function Home(props: any) {
         <Navbar />
         <HeroSectionTCA />
         <CallToAction />
-        <Features />
+        <FeaturesGroup />
         <TestimonialsGroup />
         <Footer />
       </div>
