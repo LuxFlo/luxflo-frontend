@@ -3,12 +3,14 @@ import Link from "next/link";
 export default function HeroSectionTCA() {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 shadow-lg flex bg-white px-32">
-      <div
-        className="w-1/2 bg-cover bg-center"
-        style={{
-          backgroundImage: "url(/luxflo_logo.png?height=800&width=960)",
-        }}
-      />
+      <div className="w-1/2 items-center ">
+        <div
+          className="h-full w-full bg-cover bg-center xl:w-[550px] 2xl:w-[750px]"
+          style={{
+            backgroundImage: "url(/luxflo_logo.png?height=800&width=960)",
+          }}
+        ></div>
+      </div>
       <div className="w-1/2 px-4 md:px-6 py-12 md:py-24 lg:py-32">
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
