@@ -47,9 +47,9 @@ export default function ContractForm() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-0 lg:px-8">
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-5xl">
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-5xl">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="buyer"
