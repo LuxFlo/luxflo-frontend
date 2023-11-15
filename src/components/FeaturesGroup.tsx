@@ -8,7 +8,7 @@ export default function FeaturesGroup() {
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 items-center">
         <div className="flex flex-col items-center space-y-4">
           <svg
-            className=" h-8 w-8 text-yellow-600"
+            className=" h-8 w-8 text-green-600"
             fill="none"
             height="24"
             stroke="currentColor"
@@ -19,8 +19,8 @@ export default function FeaturesGroup() {
             width="24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
-            <path d="m13 12-3 5h4l-3 5" />
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+            <path d="m9 12 2 2 4-4" />
           </svg>
           <h3 className="text-xl font-semibold">A.I. Arbitration</h3>
           <p className="text-gray-600">
@@ -48,7 +48,7 @@ export default function FeaturesGroup() {
         </div>
         <div className="flex flex-col items-center space-y-4">
           <svg
-            className=" h-8 w-8 text-blue-600"
+            className=" h-8 w-8 text-green-600"
             fill="none"
             height="24"
             stroke="currentColor"
@@ -59,9 +59,8 @@ export default function FeaturesGroup() {
             width="24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-            <path d="M12 17h.01" />
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+            <path d="m9 12 2 2 4-4" />
           </svg>
           <h3 className="text-xl font-semibold">
             All ASA&apos;s are supported
