@@ -31,7 +31,7 @@ export default function Page() {
     {
       name: "Miro Sourial",
       title: "CEO",
-      description: "HobbyFlo's vision was birthed from Miro's imagination.",
+      description: "LuxFlo's vision was birthed from Miro's imagination.",
       imageUrl: "/team/miro_sourial.jpeg",
     },
     // {

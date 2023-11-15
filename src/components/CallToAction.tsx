@@ -9,7 +9,7 @@ function CallToAction() {
   return (
     <div className="bg-[#00dc94] text-black text-center p-12">
       <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-      <p className="mb-4">Try HobbyFlo today!</p>
+      <p className="mb-4">Try LuxFlo today!</p>
       <button
         onClick={() => {
           router.push("/dashboard/contract");
