@@ -34,13 +34,13 @@ export default function Page() {
       description: "LuxFlo's vision was birthed from Miro's imagination.",
       imageUrl: "/team/miro_sourial.jpeg",
     },
-    // {
-    //   name: "Patrick Devaney",
-    //   title: "CTO",
-    //   description:
-    //     "Patrick's experience with AVM and EVM development is unparalleled.",
-    //   imageUrl: "/team/Patrick_Devaney.png",
-    // },
+    {
+      name: "Patrick Devaney",
+      title: "COO",
+      description:
+        "Patrick is responsible for investor relations, partnerships and marketing.",
+      imageUrl: "/team/patrick_devaney.jpg",
+    },
     {
       name: "Julio M Cruz",
       title: "Architect",
@@ -49,8 +49,9 @@ export default function Page() {
     },
     {
       name: "Tad Duval",
-      title: "COO",
-      description: "Tad is responsible for partnerships and marketing.",
+      title: "CTO",
+      description:
+        "Tad brings development skills to the table including AVM and EVM experience.",
       imageUrl:
         "https://media.licdn.com/dms/image/D4E03AQFeaPTgFLJQSA/profile-displayphoto-shrink_800_800/0/1693350818487?e=2147483647&v=beta&t=CcSWxYbN0ndAgW27J_52nYTkfzc3f2kpOaplFVi_zE0",
     },
@@ -70,7 +71,7 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
             {teamMembers.map((member, index) => (
               <TeamMember key={index} {...member} />
             ))}
