@@ -90,7 +90,13 @@ export default function Dashboard() {
   if (statusAlgorand.l) {
     jsx = "...";
   } else if (statusAlgorand.v) {
-    jsx = <BlockchainHealthWidget healthResponse={statusAlgorand.v} />;
+    jsx = (
+      <BlockchainHealthWidget
+        healthResponse={statusAlgorand.v}
+        network={state.network}
+        accountAddress={accountAddress}
+      />
+    );
   } else {
     jsx = "?";
   }
