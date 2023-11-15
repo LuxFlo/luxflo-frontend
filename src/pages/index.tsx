@@ -1,4 +1,4 @@
-import CallToAction from "@/components/CallToAction";
+import CallToActionSection from "@/components/CallToActionSection";
 import FeaturesGroup from "@/components/FeaturesGroup";
 import Footer from "@/components/Footer";
 import HeroSectionTCA from "@/components/HeroSectionCTA";
@@ -11,7 +11,7 @@ export default function Home(props: any) {
       <div>
         <Navbar />
         <HeroSectionTCA />
-        <CallToAction />
+        <CallToActionSection />
         <FeaturesGroup />
         <TestimonialsGroup />
         <Footer />
