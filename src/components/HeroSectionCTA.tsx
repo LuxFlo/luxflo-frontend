@@ -5,7 +5,7 @@ export default function HeroSectionTCA() {
     <section className="w-full py-12 md:py-24 lg:py-32 shadow-lg flex bg-white px-32">
       <div className="w-1/2 items-center ">
         <div
-          className="h-full w-full bg-cover bg-center xl:w-[550px] 2xl:w-[750px]"
+          className="h-full w-full bg-cover bg-center xl:w-[550px] 2xl:w-[750px] m-auto"
           style={{
             backgroundImage: "url(/luxflo_logo.png?height=800&width=960)",
           }}
