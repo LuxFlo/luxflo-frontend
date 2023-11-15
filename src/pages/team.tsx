@@ -32,15 +32,15 @@ export default function Page() {
       name: "Miro Sourial",
       title: "CEO",
       description: "HobbyFlo's vision was birthed from Miro's imagination.",
-      imageUrl: "/team/Miro_Sourial.png",
+      imageUrl: "/team/miro_sourial.jpeg",
     },
-    {
-      name: "Patrick Devaney",
-      title: "CTO",
-      description:
-        "Patrick's experience with AVM and EVM development is unparalleled.",
-      imageUrl: "/team/Patrick_Devaney.png",
-    },
+    // {
+    //   name: "Patrick Devaney",
+    //   title: "CTO",
+    //   description:
+    //     "Patrick's experience with AVM and EVM development is unparalleled.",
+    //   imageUrl: "/team/Patrick_Devaney.png",
+    // },
     {
       name: "Julio M Cruz",
       title: "Architect",
@@ -70,7 +70,7 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
             {teamMembers.map((member, index) => (
               <TeamMember key={index} {...member} />
             ))}

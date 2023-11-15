@@ -15,6 +15,8 @@ export default function Dashboard() {
       .then((newAccounts) => {
         peraWallet?.connector?.on("disconnect", handleDisconnectWalletClick);
 
+        console.log("newAccounts", newAccounts);
+
         setAccountAddress(newAccounts[0] || "");
       })
       .catch((error) => {
