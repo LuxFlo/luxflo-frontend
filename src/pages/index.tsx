@@ -3,7 +3,7 @@ import Features from "@/components/Features";
 import Footer from "@/components/Footer";
 import HeroSectionTCA from "@/components/HeroSectionCTA";
 import Navbar from "@/components/Navbar";
-import Testimonials from "@/components/Testimonials";
+import TestimonialsGroup from "@/components/TestimonialsGroup";
 
 export default function Home(props: any) {
   return (
@@ -13,7 +13,7 @@ export default function Home(props: any) {
         <HeroSectionTCA />
         <CallToAction />
         <Features />
-        <Testimonials />
+        <TestimonialsGroup />
         <Footer />
       </div>
     </>
