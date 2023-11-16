@@ -4,17 +4,17 @@ import React from "react";
 export default function FooterGroup() {
   return (
     <footer className="flex justify-between items-center bg-black text-white py-12 px-6">
-      <div className="text-lg font-bold mx-48">
+      <div className="text-lg font-bold mx-6">
         © {new Date().getFullYear()} LuxFlo. All rights reserved.
       </div>
-      <div className="space-x-4 mx-48">
+      <div className="space-x-4 mx-6">
         <Link
           className="text-lg mx-24"
           target="_blank"
           rel="noreferrer"
           href="https://youtu.be/XAllCqKfQtg"
         >
-          Video Presentation
+          Demo Video
         </Link>
         <Link
           className="text-lg"
