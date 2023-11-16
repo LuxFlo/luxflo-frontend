@@ -1,6 +1,12 @@
 import React from "react";
 
-export const BalanceWidget = () => {
+interface P {
+  amount: number;
+}
+
+export const BalanceWidget = (p: P) => {
+  const { amount } = p;
+
   return (
     <div className=" bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div
@@ -15,7 +21,7 @@ export const BalanceWidget = () => {
           </div>
           <div className="text-sm flex w-full">
             <div className="flex items-center space-x-2 mt-5 w-9/12 truncate p4">
-              <div>0.41</div>
+              <div>{amount}</div>
             </div>
             <div className="flex items-center space-x-2 mt-5 w-3/12 transform hover:scale-105 duration-200 overflow-hidden">
               ALGO
