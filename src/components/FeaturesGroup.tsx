@@ -2,7 +2,7 @@ export default function FeaturesGroup() {
   return (
     <section className="py-12 space-y-8 text-center px-24">
       <h2 className="text-3xl font-bold">Key Features</h2>
-      <p className="text-lg text-gray-600">
+      <p className="text-lg text-gray-800">
         Discover what makes our platform stand out from the crowd
       </p>
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 items-center">
