@@ -12,7 +12,7 @@ export const ActionsWidget = (p: P) => {
   const sender = { signer, addr: activeAddress! };
 
   return (
-    <div className=" bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div className="bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div
           className="rounded-2xl flex bg-white p-6 flex-col space-y-5"
@@ -22,7 +22,7 @@ export const ActionsWidget = (p: P) => {
             <p className="text-lg font-semibold">Actions</p>
           </div>
 
-          <div className="flex space-x-5 items-center">
+          <div className="flex flex-wrap justify-center space-y-1 space-x-1 items-center">
             <button
               onClick={async () => {
                 infoToast("Get Parties");
