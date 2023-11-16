@@ -4,10 +4,10 @@ import { Escrow, EscrowClient } from "@/contracts/EscrowClient";
 import { useWallet } from "@txnlab/use-wallet";
 
 /* Example usage
-<EscrowBootstrap
+<EscrowRenterArbitration
   buttonClass="btn m-2"
   buttonLoadingNode={<span className="loading loading-spinner" />}
-  buttonNode="Call bootstrap"
+  buttonNode="Call renterArbitration"
   typedClient={typedClient}
 />
 */
@@ -18,15 +18,15 @@ type Props = {
   typedClient: EscrowClient;
 };
 
-const EscrowBootstrap = (props: Props) => {
+const EscrowRenterArbitration = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { activeAddress, signer } = useWallet();
   const sender = { signer, addr: activeAddress! };
 
   const callMethod = async () => {
     setLoading(true);
-    console.log(`Calling bootstrap`);
-    await props.typedClient.bootstrap({}, { sender });
+    console.log(`Calling renterArbitration`);
+    await props.typedClient.renterArbitration({}, { sender });
     setLoading(false);
   };
 
@@ -37,4 +37,4 @@ const EscrowBootstrap = (props: Props) => {
   );
 };
 
-export default EscrowBootstrap;
+export default EscrowRenterArbitration;
