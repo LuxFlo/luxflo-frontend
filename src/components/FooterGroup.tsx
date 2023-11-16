@@ -9,13 +9,15 @@ export default function FooterGroup() {
       </div>
       <div className="space-x-4 mx-6">
         <Link
-          className="text-lg mx-24"
+          className="text-lg"
           target="_blank"
           rel="noreferrer"
           href="https://youtu.be/XAllCqKfQtg"
         >
           Demo Video
         </Link>
+      </div>
+      <div className="space-x-4 mx-6">
         <Link
           className="text-lg"
           target="_blank"
