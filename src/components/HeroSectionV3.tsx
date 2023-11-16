@@ -44,7 +44,7 @@ function HeroSection() {
           <h1 className="text-4xl md:text-7xl font-bold text-black mb-6">
             LuxFlo
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 mb-8">
+          <p className="text-lg md:text-xl text-gray-800 mb-8">
             Crypto-Collateralized Luxury Rentals
           </p>
           {/* <Link
@@ -54,7 +54,7 @@ function HeroSection() {
             Get Started
           </Link> */}
           <button
-            className="bg-white text-black px-8 py-2 rounded-md shadow-md hover:bg-green-200 font-bold"
+            className="bg-white text-black px-8 py-2 rounded-md shadow-lg hover:bg-green-200 font-bold"
             onClick={() => {
               router.push("/dashboard");
             }}

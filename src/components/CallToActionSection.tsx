@@ -10,7 +10,7 @@ export default function CallToActionSection() {
     <section className="w-full py-12 bg-[#00dc94]">
       <div className="container mx-auto px-4 md:px-6 text-center">
         <div className="flex flex-row justify-center gap-8">
-          <div className="bg-green p-4 rounded-lg border border-gray-300 shadow-md hover:bg-green-400">
+          <div className="bg-green p-4 rounded-lg border border-gray-300 shadow-lg hover:bg-green-400">
             <h2 className="text-4xl font-bold text-black md:text-5xl">
               Ready to get started?
             </h2>
@@ -18,7 +18,7 @@ export default function CallToActionSection() {
           </div>
 
           <button
-            className="bg-green text-black px-8 py-2 rounded-md shadow-lg hover:bg-green-400 font-bold"
+            className="bg-green text-black md:text-3xl px-10 py-2 rounded-lg shadow-lg hover:bg-green-400 font-bold"
             onClick={() => {
               router.push("/dashboard/contract");
             }}

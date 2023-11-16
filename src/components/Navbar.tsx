@@ -12,15 +12,16 @@ function Navbar() {
         onClick={() => {
           router.push("/");
         }}
+        style={{ textShadow: "0 0 50px #00dc94" }} 
       >
         LuxFlo
       </h1>
       <div>
-        <Link href="/dashboard" className="px-4">
-          Enter App
+        <Link href="/dashboard" className="px-10 font-bold">
+          <span style={{ textShadow: "0 0 50px #00dc94" }}>Enter App</span> 
         </Link>
-        <Link href="/team" className="px-4">
-          Team
+        <Link href="/team" className="px-10 font-bold">
+          <span style={{ textShadow: "0 0 100px #00dc94" }}>Team</span>
         </Link>
       </div>
     </nav>
