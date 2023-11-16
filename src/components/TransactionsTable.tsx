@@ -91,15 +91,20 @@ export function TransactionsTable(p: P) {
                     {txn["tx-type"]}
                   </td>
                   <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <button
-                      className="text-blue-600 hover:text-blue-900"
-                      onClick={() => {
-                        router.push(`/`);
-                      }}
-                    >
-                      View
-                      <span className="sr-only">{txn.id}</span>
-                    </button>
+                    {txn["tx-type"] === "appl" &&
+                      txn["created-application-index"] && (
+                        <button
+                          className="text-blue-600 hover:text-blue-900"
+                          onClick={() => {
+                            router.push(
+                              `/dashboard/deployed-contract?app-id=${txn["created-application-index"]}`
+                            );
+                          }}
+                        >
+                          View
+                          <span className="sr-only">{txn.id}</span>
+                        </button>
+                      )}
                   </td>
                 </tr>
               );

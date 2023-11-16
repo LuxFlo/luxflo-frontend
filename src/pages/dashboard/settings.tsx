@@ -1,10 +1,5 @@
 import SettingsForm from "@/components/SettingsForm";
 import DashboardLayout from "@/layouts/dashboardLayout";
-import { PeraWalletConnect } from "@perawallet/connect";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-
-const peraWallet = new PeraWalletConnect();
 
 export default function Settings() {
   return (
