@@ -1,6 +1,15 @@
 import React from "react";
 
-export const PartiesWidget = () => {
+interface P {
+  renter: string;
+  arbiter: string;
+  owner: string;
+  escrowAmount: number;
+}
+
+export const StateWidget = (p: P) => {
+  const { renter, arbiter, owner, escrowAmount } = p;
+
   return (
     <div className=" bg-white py-6 flex flex-col justify-center sm:py-12">
       <div
@@ -15,18 +24,18 @@ export const PartiesWidget = () => {
           </div>
           <div className="text-sm flex w-full">
             <div className="flex items-center space-x-2 mt-5 w-9/12">
-              <div>Buyer</div>
+              <div>Renter</div>
             </div>
             <div className="flex items-center space-x-2 mt-5 w-3/12 transform hover:scale-105 duration-200 overflow-hidden">
-              0xZBACV42L...
+              {renter.slice(0, 7)}...
             </div>
           </div>
           <div className="text-sm flex w-full">
             <div className="flex items-center space-x-2 mt-5 w-9/12">
-              <div>Seller</div>
+              <div>Owner</div>
             </div>
             <div className="flex items-center space-x-2 mt-5 w-3/12 transform hover:scale-105 duration-200 overflow-hidden">
-              0xZBACV42L...
+              {owner.slice(0, 7)}...
             </div>
           </div>
           <div className="text-sm flex w-full">
@@ -34,7 +43,15 @@ export const PartiesWidget = () => {
               <div>Arbiter</div>
             </div>
             <div className="flex items-center space-x-2 mt-5 w-3/12 transform hover:scale-105 duration-200 overflow-hidden">
-              0xZBACV42L...
+              {arbiter.slice(0, 7)}...
+            </div>
+          </div>
+          <div className="text-sm flex w-full">
+            <div className="flex items-center space-x-2 mt-5 w-9/12">
+              <div>Escrow Amount</div>
+            </div>
+            <div className="flex items-center space-x-2 mt-5 w-3/12 transform hover:scale-105 duration-200 overflow-hidden">
+              {escrowAmount}
             </div>
           </div>
         </div>

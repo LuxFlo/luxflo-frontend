@@ -7,7 +7,7 @@ import { useWallet } from "@txnlab/use-wallet";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const [statusAlgorand, setStatusAlgorand] = useState<{
     l: boolean;
     v: any;
