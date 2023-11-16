@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 
+
 function Navbar() {
   const router = useRouter();
 
@@ -13,31 +14,15 @@ function Navbar() {
         onClick={() => {
           router.push("/");
         }}
-        style={{ textShadow: "0 0 50px #00dc94" }}
+        style={{ textShadow: "0 0 50px #00dc94" }} 
       >
         LuxFlo
       </h1>
       <div>
-        <Link
-          href="/dashboard"
-          className="px-20 font-bold" // Increase padding to 20px
-          style={{
-            background:
-              "linear-gradient(to bottom, #98ff98 0%, #00dc94 100%)",
-            boxShadow: "0 0 20px #00dc94",
-          }}
-        >
-          <span style={{ textShadow: "0 0 50px #00dc94" }}>Enter App</span>
+        <Link href="/dashboard" className="px-10 font-bold">
+          <span style={{ textShadow: "0 0 50px #00dc94" }}>Enter App</span> 
         </Link>
-        <Link
-          href="/team"
-          className="px-20 font-bold" // Increase padding to 20px
-          style={{
-            background:
-              "linear-gradient(to bottom, #98ff98 0%, #00dc94 100%)",
-            boxShadow: "0 0 20px #00dc94",
-          }}
-        >
+        <Link href="/team" className="px-10 font-bold">
           <span style={{ textShadow: "0 0 100px #00dc94" }}>Team</span>
         </Link>
       </div>
