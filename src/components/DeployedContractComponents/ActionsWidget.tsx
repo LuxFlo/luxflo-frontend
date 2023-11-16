@@ -12,7 +12,7 @@ export const ActionsWidget = (p: P) => {
   const sender = { signer, addr: activeAddress! };
 
   return (
-    <div className=" bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div className="bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div
           className="rounded-2xl flex bg-white p-6 flex-col space-y-5"
@@ -22,7 +22,7 @@ export const ActionsWidget = (p: P) => {
             <p className="text-lg font-semibold">Actions</p>
           </div>
 
-          <div className="flex space-x-5 items-center">
+          <div className="flex flex-wrap justify-center space-y-1 space-x-1 items-center">
             <button
               onClick={async () => {
                 infoToast("Get Parties");
@@ -35,20 +35,53 @@ export const ActionsWidget = (p: P) => {
               Get Parties
             </button>
             <button
-              onClick={() => {
-                infoToast("Request Arbitration");
+              onClick={async () => {
+                infoToast("Owner Requests Arbitration");
+                const resp = await p.typedClient.ownerArbitration(
+                  {},
+                  { sender }
+                );
+                console.log("resp", resp);
               }}
               className="rounded-lg bg-[#00dc94] text-black text-sm p-2 px-6 transform hover:scale-105 duration-300"
             >
-              Arbitrate
+              Owner Requests Arbitration
             </button>
             <button
-              onClick={() => {
-                infoToast("Withdraw funds");
+              onClick={async () => {
+                infoToast("Renter Requests Arbitration");
+                const resp = await p.typedClient.renterArbitration(
+                  {},
+                  { sender }
+                );
+                console.log("resp", resp);
               }}
               className="rounded-lg bg-[#00dc94] text-black text-sm p-2 px-6 transform hover:scale-105 duration-300"
             >
-              Withdraw Money
+              Renter Requests Arbitration
+            </button>
+            <button
+              onClick={async () => {
+                infoToast("Owner Withdraw Balance");
+                const resp = await p.typedClient.ownerWithdraw({}, { sender });
+                console.log("resp", resp);
+              }}
+              className="rounded-lg bg-[#00dc94] text-black text-sm p-2 px-6 transform hover:scale-105 duration-300"
+            >
+              Owner Withdraw Balance
+            </button>
+            <button
+              onClick={async () => {
+                infoToast("Arbiter Withdraw Balance");
+                const resp = await p.typedClient.arbiterWithdraw(
+                  {},
+                  { sender }
+                );
+                console.log("resp", resp);
+              }}
+              className="rounded-lg bg-[#00dc94] text-black text-sm p-2 px-6 transform hover:scale-105 duration-300"
+            >
+              Arbiter Withdraw Balance
             </button>
           </div>
         </div>
