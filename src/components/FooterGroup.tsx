@@ -22,7 +22,7 @@ export default function FooterGroup() {
           className="text-lg"
           target="_blank"
           rel="noreferrer"
-          href="https://docs.google.com/presentation/d/1SARZXqFIe9KMteMeYkZrcECfA_kiAFfk3XvUYY3511Q/edit?usp=sharing"
+          href="https://docs.google.com/presentation/d/1Ebm-ZqtjhS9Eavl_uu_dRtlz27zB7o3q3PqrsLt5ZVg/edit?usp=sharing"
         >
           Pitch Deck
         </Link>
